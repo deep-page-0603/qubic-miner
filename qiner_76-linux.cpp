@@ -2336,14 +2336,25 @@ struct Miner
     {
         unsigned char randomSeed[32];
         memset(randomSeed, 0, sizeof(randomSeed));
-        randomSeed[0] = 28;
-        randomSeed[1] = 0;
-        randomSeed[2] = 7;
-        randomSeed[3] = 69;
-        randomSeed[4] = 255;
-        randomSeed[5] = 0;
-        randomSeed[6] = 73;
-        randomSeed[7] = 77;
+        // randomSeed[0] = 28;
+        // randomSeed[1] = 0;
+        // randomSeed[2] = 7;
+        // randomSeed[3] = 69;
+        // randomSeed[4] = 255;
+        // randomSeed[5] = 0;
+        // randomSeed[6] = 73;
+        // randomSeed[7] = 77;
+
+        randomSeed[0] = 1;
+        randomSeed[1] = 67;
+        randomSeed[2] = 24;
+        randomSeed[3] = 77;
+        randomSeed[4] = 97;
+        randomSeed[5] = 211;
+        randomSeed[6] = 88;
+        randomSeed[7] = 1;
+
+        
         random(randomSeed, randomSeed, (unsigned char*)data, sizeof(data));
 
         memset(computorPublicKey, 0, sizeof(computorPublicKey));
@@ -2722,7 +2733,22 @@ int main(int argc, char *argv[])
                     time_t rawTime = time(0);
                     tm *systemTime = localtime(&rawTime);
 
-                    printf("|   %d-%d%d-%d%d %d%d:%d%d:%d%d   |   %lli it/s   |   %i solutions   |   %.6s...%s   |\n", systemTime->tm_year + 1900, ((int)systemTime->tm_mon + 1) / 10, ((int)systemTime->tm_mon + 1) % 10, (int)systemTime->tm_mday / 10, (int)systemTime->tm_mday % 10, (int)systemTime->tm_hour / 10, (int)systemTime->tm_hour % 10, (int)systemTime->tm_min / 10, (int)systemTime->tm_min % 10, (int)systemTime->tm_sec / 10, (int)systemTime->tm_sec % 10, (numberOfMiningIterations - prevNumberOfMiningIterations) * 1000 / delta, numberOfFoundSolutions, argv[2], argv[2] + strlen((const char*)argv[2]) - 6);
+                    printf("|   %d-%d%d-%d%d %d%d:%d%d:%d%d   |   %lli it/s   |   %i solutions   |   %.6s...%s   |\n",
+                        systemTime->tm_year + 1900,
+                        ((int)systemTime->tm_mon + 1) / 10,
+                        ((int)systemTime->tm_mon + 1) % 10,
+                        (int)systemTime->tm_mday / 10,
+                        (int)systemTime->tm_mday % 10,
+                        (int)systemTime->tm_hour / 10,
+                        (int)systemTime->tm_hour % 10,
+                        (int)systemTime->tm_min / 10,
+                        (int)systemTime->tm_min % 10,
+                        (int)systemTime->tm_sec / 10,
+                        (int)systemTime->tm_sec % 10,
+                        (numberOfMiningIterations - prevNumberOfMiningIterations) * 1000 / delta,
+                        numberOfFoundSolutions,
+                        argv[2],
+                        argv[2] + strlen((const char*)argv[2]) - 6);
 
                     prevNumberOfMiningIterations = numberOfMiningIterations;
                     timestamp = GetTickCountMs();
